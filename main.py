@@ -3,14 +3,16 @@ from kivymd.uix.screen import Screen
 from kivy.lang import Builder
 from kivymd.app import MDApp
 
+Builder.load_file('main_screen.kv')
+
+
 class MainScreen(Screen):
-    def main(self):
-        return Builder.load_file('main_screen.kv')
+    pass
 
 
 class MainApp(MDApp):
     def on_tab_screen_2(self):
-        print('hshshshsshshshshshshshssh')
+        print('------------------')
 
     def build(self):
         Window.size = (300, 500)
