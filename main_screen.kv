@@ -8,16 +8,33 @@
             text_color_active: 0, 0, 0, 1
 
             MDBottomNavigationItem:
+                text: 'Теория'
+                icon: 'book'
                 name: 'screen 1'
-                text: 'Практикум'
-                icon: 'pencil'
+
 
             MDBottomNavigationItem:
                 name: 'screen 2'
-                text: 'Теория'
-                icon: 'book'
-                on_tab_press: app.on_tab_screen_2()
+                text: 'Практикум'
+                icon: 'pencil'
 
-                MDLabel:
-                    text:'Правила чередующихся корней\nНаписание чередующейся гласной в корне слова зависит от разных правил:\nУдарения / суффикса после корня / гласной после корня / значения.\nИсключения тоже относятся к чередованиям!'
-                    halign: 'center'
+                on_tab_press: app.on_tab_screen_2()
+                MDScrollView:
+
+                    BoxLayout:
+                        orientation: "vertical"
+
+                        MDLabel:
+                            text: "Укажите варианты ответов, в которых во всех словах одного ряда пропущена одна и та же буква. Запишите номера ответов.\n\n1)заг..релый, непром..каемый, к..мендант\n2)оп..раться, см..нать (траву), поч..татель (таланта)\n3)укр..титель (тигров), благосл..вить, симп..тичный\n4)посв..щение (другу), недос..гаемый, у..звить\n5)бл..стеть, с..дина (в волосах), прим..рять (поссорившихся)"
+                            halign: "center"
+                            adaptive_height: True
+                        MDLabel:
+                            text: "2 style"
+                            halign: "center"
+                            adaptive_height: True
+                        MDLabel:
+                            text: "3 style"
+                            halign: "center"
+                            adaptive_height: True
+
+
