@@ -18,23 +18,27 @@
                 text: 'Практикум'
                 icon: 'pencil'
 
-                on_tab_press: app.on_tab_screen_2()
                 MDScrollView:
 
-                    BoxLayout:
+                    MDBoxLayout:
                         orientation: "vertical"
+                        spacing: "12dp"
+                        padding: "24dp"
 
-                        MDLabel:
-                            text: "Укажите варианты ответов, в которых во всех словах одного ряда пропущена одна и та же буква. Запишите номера ответов.\n\n1)заг..релый, непром..каемый, к..мендант\n2)оп..раться, см..нать (траву), поч..татель (таланта)\n3)укр..титель (тигров), благосл..вить, симп..тичный\n4)посв..щение (другу), недос..гаемый, у..звить\n5)бл..стеть, с..дина (в волосах), прим..рять (поссорившихся)"
-                            halign: "center"
-                            adaptive_height: True
-                        MDLabel:
-                            text: "2 style"
-                            halign: "center"
-                            adaptive_height: True
-                        MDLabel:
-                            text: "3 style"
-                            halign: "center"
-                            adaptive_height: True
+                        MDScrollView:
+
+                            MDBoxLayout:
+                                id: box
+                                orientation: "vertical"
+                                padding: "24dp"
+                                spacing: "12dp"
+                                adaptive_height: True
+
+                        MDTextField:
+                            max_height: "200dp"
+                            mode: "fill"
+                            multiline: True
+
+                        MDWidget:
 
 
