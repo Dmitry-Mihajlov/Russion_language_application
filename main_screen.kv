@@ -1,0 +1,24 @@
+<MainScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+        MDBottomNavigation:
+            #panel_color: "#eeeaea"
+            text_color_active: "lightgrey"
+            text_color_normal: 1, 1, 1, 1
+            text_color_active: 0, 0, 0, 1
+
+            MDBottomNavigationItem:
+                name: 'screen 1'
+                text: 'Практикум'
+                icon: 'pencil'
+
+            MDBottomNavigationItem:
+                name: 'screen 2'
+                text: 'Теория'
+                icon: 'book'
+                on_tab_press: app.on_tab_screen_2()
+
+                MDLabel:
+                    text:'Правила чередующихся корней\nНаписание чередующейся гласной в корне слова зависит от разных правил:\nУдарения / суффикса после корня / гласной после корня / значения.\nИсключения тоже относятся к чередованиям!'
+                    halign: 'center'
+
