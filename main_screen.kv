@@ -8,37 +8,26 @@
             text_color_active: 0, 0, 0, 1
 
             MDBottomNavigationItem:
-                text: 'Теория'
-                icon: 'book'
                 name: 'screen 1'
-
-
-            MDBottomNavigationItem:
-                name: 'screen 2'
                 text: 'Практикум'
                 icon: 'pencil'
 
-                MDScrollView:
+                MDBoxLayout:
+                    orientation: "vertical"
 
                     MDBoxLayout:
-                        orientation: "vertical"
-                        spacing: "12dp"
-                        padding: "24dp"
-
-                        MDScrollView:
-
+                        id:page
+                        ScrollView:
                             MDBoxLayout:
                                 id: box
                                 orientation: "vertical"
-                                padding: "24dp"
-                                spacing: "12dp"
+                                padding: "10dp"
+                                spacing: "10dp"
                                 adaptive_height: True
 
-                        MDTextField:
-                            max_height: "200dp"
-                            mode: "fill"
-                            multiline: True
-
-                        MDWidget:
+            MDBottomNavigationItem:
+                name: 'screen 2'
+                text: 'Теория'
+                icon: 'book'
 
 

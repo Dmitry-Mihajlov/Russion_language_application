@@ -4,19 +4,10 @@ from kivymd.uix.screen import Screen
 from kivy.lang import Builder
 from kivymd.app import MDApp
 from kivymd.uix.textfield import MDTextField
+from data import data
 
 Builder.load_file('main_screen.kv')
 
-data = [
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-    "Sed blandit libero volutpat sed cras ornare arcu. Nisl vel pretium "
-    "lectus quam id leo in. Tincidunt arcu non sodales neque sodales ut etiam.",
-    "Elit scelerisque mauris pellentesque pulvinar pellentesque habitant. "
-    "Nisl rhoncus mattis rhoncus urna neque. Orci nulla pellentesque "
-    "dignissim enim. Ac auctor augue mauris augue neque gravida in fermentum. "
-    "Lacus suspendisse faucibus interdum posuere."
-
-]
 
 class CopyLabel(MDLabel):
     # Преобразование элементов для текста
@@ -24,8 +15,8 @@ class CopyLabel(MDLabel):
         super().__init__(*args, **kwargs)
         self.allow_selection = True
         self.adaptive_height = True
-        self.theme_text_color = "Custom"
-        self.text_color = self.theme_cls.text_color
+        self.font_style = 'Subtitle2'
+
 
 
 class MainScreen(Screen):
@@ -35,8 +26,18 @@ class MainScreen(Screen):
 class MainApp(MDApp):
     def on_start(self):
         for text in data:
+            locale = '''
+MDTextField:
+    hint_text: "Ответ"
+    font_style: 'Subtitle2'
+    font_size: '10sp'
+    helper_text: "Вводите числа слитно"
+    helper_text_mode: "on_focus"
+            '''
             copy_label = CopyLabel(text=text)
             self.root.ids.box.add_widget(copy_label)
+            self.root.ids.box.add_widget(Builder.load_string(locale))
+
 
     def build(self):
         Window.size = (300, 500)
