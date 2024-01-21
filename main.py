@@ -5,11 +5,10 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.screen import Screen
 from kivy.lang import Builder
 from kivymd.app import MDApp
-from Russion_language_application.data import data, data_answer, data_word
+from Russion_language_application.data import data_ege, data_word
 import random
 
 Builder.load_file(r'D:\Programming\PyCharm\Russion_language_application\main_screen.kv')
-data_button = []
 
 
 class CopyLabel_1(MDLabel):
@@ -36,15 +35,23 @@ class MainScreen(Screen):
 
 class MainApp(MDApp):
     def on_start(self):
-        global data_button
-        data_button = []
-
-        self.data_answer_flag = [1 for i in range(10)]
+        self.data_button = dict()
+        self.data_answer_flag = dict()
         self.data_count_app = 0
 
+        self.root.ids.box.add_widget('''
+        MDLabel:
+            adaptive_height: True
+            font_style: 'Button'
+            text: '9 задание'
+            halign: 'center'
+        ''')
         for i in range(5):
             id_word = random.randint(0, 350)
-            text = data_word[f'word_{id_word}']
+            self.data_answer_flag[f'word_{id_word}'] = 1
+
+            text_1 = 'Запишите слово с вставленными в пропуски буквами'
+            text_2 = data_word[f'word_{id_word}'][1]
             self.locale_1 = f'''
 MDTextField:
     id: word_{id_word}
@@ -58,38 +65,7 @@ MDRectangleFlatIconButton:
     icon: 'key'
     text: 'Проверить ответ'
     theme_text_color: 'Hint'
-    on_release: app.show_data({i})
-'''
-
-            # добавить текст задания на экран
-            self.copy_label = CopyLabel_1(text=text)
-            self.root.ids.box.add_widget(self.copy_label)
-
-            # добавить кнопки на экран
-            self.data_1 = Builder.load_string(self.locale_1)
-            data_button.append(self.data_1)
-            self.data_2 = Builder.load_string(self.locale_2)
-
-            self.root.ids.box.add_widget(self.data_1)
-            self.root.ids.box.add_widget(self.data_2)
-
-        for i in range(len(data)):
-            text_1 = data[i][0]
-            text_2 = data[i][1]
-            self.locale_1 = f'''
-MDTextField:
-    id: {i}
-    hint_text: "Ответ"
-    font_style: 'Caption'
-    font_size: '10sp'
-    helper_text_mode: "on_focus"
-'''
-            self.locale_2 = f'''  
-MDRectangleFlatIconButton:
-    icon: 'key'
-    text: 'Проверить ответ'
-    theme_text_color: 'Hint'
-    on_release: app.show_data({i})
+    on_release: app.show_data('word_{id_word}')
 '''
 
             # добавить текст задания на экран
@@ -100,13 +76,49 @@ MDRectangleFlatIconButton:
 
             # добавить кнопки на экран
             self.data_1 = Builder.load_string(self.locale_1)
-            data_button.append(self.data_1)
+            self.data_button[f'word_{id_word}'] = self.data_1
             self.data_2 = Builder.load_string(self.locale_2)
 
             self.root.ids.box.add_widget(self.data_1)
             self.root.ids.box.add_widget(self.data_2)
 
-            if i == len(data) - 1:
+        for i in range(5):
+            id_ege = random.randint(0, 5)
+            self.data_answer_flag[f'ege_{id_ege}'] = 1
+
+            text_1 = data_ege[f'ege_{id_ege}'][0][0]
+            text_2 = data_ege[f'ege_{id_ege}'][0][1]
+            self.locale_1 = f'''
+MDTextField:
+    id: ege_{id_ege}
+    hint_text: "Ответ"
+    font_style: 'Caption'
+    font_size: '10sp'
+    helper_text_mode: "on_focus"
+'''
+            self.locale_2 = f'''  
+MDRectangleFlatIconButton:
+    icon: 'key'
+    text: 'Проверить ответ'
+    theme_text_color: 'Hint'
+    on_release: app.show_data('ege_{id_ege}')
+'''
+
+            # добавить текст задания на экран
+            self.copy_label_1 = CopyLabel_1(text=text_1)
+            self.copy_label_2 = CopyLabel_2(text=text_2)
+            self.root.ids.box.add_widget(self.copy_label_1)
+            self.root.ids.box.add_widget(self.copy_label_2)
+
+            # добавить кнопки на экран
+            self.data_1 = Builder.load_string(self.locale_1)
+            self.data_button[f'ege_{id_ege}'] = self.data_1
+            self.data_2 = Builder.load_string(self.locale_2)
+
+            self.root.ids.box.add_widget(self.data_1)
+            self.root.ids.box.add_widget(self.data_2)
+
+            if i == 4:
                 self.root.ids.box.add_widget(Builder.load_string(
                     '''
 MDRoundFlatButton:
@@ -117,16 +129,15 @@ MDRoundFlatButton:
 '''
                 ))
 
-
     def result(self):
         def func():
             self.root.ids.box.clear_widgets()
             dialog.dismiss()
             self.on_start()
 
-        if self.data_count_app < len(data) / 5:
+        if self.data_count_app < 3:
             text = 'Лучше потренируйтесь еще и обязательно повторите теорию'
-        elif self.data_count_app < 8 * len(data) / 10:
+        elif self.data_count_app < 12:
             text = 'Хороший результат, так держать!'
         else:
             text = 'Прекрасный результат!'
@@ -142,8 +153,15 @@ MDRoundFlatButton:
         dialog.open()
 
     def show_data(self, id_element):
-        input_answer = data_button[id_element].text
-        if input_answer == data_answer[id_element] and self.data_answer_flag[id_element]:
+        input_answer = self.data_button[id_element].text
+
+        # проверка вида теста
+        if id_element[:3] == 'ege':
+            flag = input_answer == data_ege[id_element][2] and self.data_answer_flag[id_element]
+        else:
+            flag = input_answer == data_word[id_element][0] and self.data_answer_flag[id_element]
+
+        if flag:
             print(input_answer, 'YES')
 
             def dialog_answer_good():
@@ -164,8 +182,13 @@ MDRoundFlatButton:
 
         elif self.data_answer_flag[id_element]:
             print(input_answer, 'NO')
+            if id_element[:3] == 'ege':
+                answer = data_ege[id_element][2][0]
+            else:
+                answer = data_word[id_element][0]
+
             dialog_2 = MDDialog(
-                text=f'Правильный ответ: {data_answer[id_element]}',
+                text=f'Правильный ответ: {answer}',
                 buttons=[
                     MDFlatButton(
                         text='Закрыть',
