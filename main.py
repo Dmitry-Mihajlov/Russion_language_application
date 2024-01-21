@@ -1,4 +1,3 @@
-from kivy.core.window import Window
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
@@ -8,7 +7,7 @@ from kivymd.app import MDApp
 from Russion_language_application.data import data_ege, data_word
 import random
 
-Builder.load_file(r'D:\Programming\PyCharm\Russion_language_application\main_screen.kv')
+Builder.load_file(r'Russion_language_application\main_screen.kv')
 
 
 class CopyLabel_1(MDLabel):
@@ -83,7 +82,7 @@ MDRectangleFlatIconButton:
             self.root.ids.box.add_widget(self.data_2)
 
         for i in range(5):
-            id_ege = random.randint(0, 5)
+            id_ege = random.randint(0, len(data_ege) - 1)
             self.data_answer_flag[f'ege_{id_ege}'] = 1
 
             text_1 = data_ege[f'ege_{id_ege}'][0][0]
@@ -142,7 +141,7 @@ MDRoundFlatButton:
         else:
             text = 'Прекрасный результат!'
         dialog = MDDialog(
-            text=text,
+            title=text,
             buttons=[
                 MDFlatButton(
                     text='Пройти следующий тест',
@@ -183,7 +182,7 @@ MDRoundFlatButton:
         elif self.data_answer_flag[id_element]:
             print(input_answer, 'NO')
             if id_element[:3] == 'ege':
-                answer = data_ege[id_element][2][0]
+                answer = f"[font=21154.otf]{data_ege[id_element][2][0]}\n{data_ege[id_element][1][0]}\n{data_ege[id_element][1][1]}[/font]"
             else:
                 answer = data_word[id_element][0]
 
@@ -229,7 +228,6 @@ MDRoundFlatButton:
             dialog.open()
 
     def build(self):
-        Window.size = (300, 500)
         return MainScreen()
 
 
