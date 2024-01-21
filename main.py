@@ -39,13 +39,13 @@ class MainApp(MDApp):
         self.data_answer_flag = dict()
         self.data_count_app = 0
 
-        self.root.ids.box.add_widget('''
-        MDLabel:
-            adaptive_height: True
-            font_style: 'Button'
-            text: '9 задание'
-            halign: 'center'
-        ''')
+        self.root.ids.box.add_widget(Builder.load_string('''
+MDLabel:
+    adaptive_height: True
+    font_style: 'Button'
+    text: '9 задание'
+    halign: 'center'
+'''))
         for i in range(5):
             id_word = random.randint(0, 350)
             self.data_answer_flag[f'word_{id_word}'] = 1
