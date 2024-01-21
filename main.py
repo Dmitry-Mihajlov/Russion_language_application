@@ -1,16 +1,13 @@
 from kivy.core.window import Window
-from kivy.uix.boxlayout import BoxLayout
-from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.label import MDLabel
 from kivymd.uix.screen import Screen
 from kivy.lang import Builder
 from kivymd.app import MDApp
-from kivymd.uix.textfield import MDTextField
 from Russion_language_application.data import data, data_answer
 
-Builder.load_file('D:\Programming\PyCharm\Russion_language_application\main_screen.kv')
+Builder.load_file(r'D:\Programming\PyCharm\Russion_language_application\main_screen.kv')
 data_button = []
 
 
@@ -37,7 +34,6 @@ class MainScreen(Screen):
 
 
 class MainApp(MDApp):
-
     def on_start(self):
         global data_button
         data_button = []
@@ -86,7 +82,7 @@ MDRoundFlatButton:
     pos_hint: {"center_x": .5}
 '''
                 ))
-        id_old = i
+
 
     def result(self):
         def func():
