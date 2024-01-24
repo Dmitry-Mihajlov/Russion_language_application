@@ -7,12 +7,12 @@ from kivymd.app import MDApp
 from Russion_language_application.data import data_ege, data_word
 import random
 
-Builder.load_file(r'Russion_language_application\main_screen.kv')
+Builder.load_file('main_screen.kv')
 
 
 class CopyLabel_1(MDLabel):
     # Преобразование элементов для текста
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.allow_selection = True
         self.adaptive_height = True
@@ -21,7 +21,7 @@ class CopyLabel_1(MDLabel):
 
 class CopyLabel_2(MDLabel):
     # Преобразование элементов для текста
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.allow_selection = True
         self.adaptive_height = True
@@ -33,6 +33,18 @@ class MainScreen(Screen):
 
 
 class MainApp(MDApp):
+    def __init__(self):
+        super().__init__()
+        self.data_2 = None
+        self.data_1 = None
+        self.copy_label_2 = None
+        self.copy_label_1 = None
+        self.locale_2 = None
+        self.locale_1 = None
+        self.data_count_app = None
+        self.data_answer_flag = None
+        self.data_button = None
+
     def on_start(self):
         self.data_button = dict()
         self.data_answer_flag = dict()
@@ -182,7 +194,8 @@ MDRoundFlatButton:
         elif self.data_answer_flag[id_element]:
             print(input_answer, 'NO')
             if id_element[:3] == 'ege':
-                answer = f"[font=21154.otf]{data_ege[id_element][2][0]}\n{data_ege[id_element][1][0]}\n{data_ege[id_element][1][1]}[/font]"
+                answer = (f"[font=21154.otf]{data_ege[id_element][2][0]}\n"
+                          f"{data_ege[id_element][1][0]}\n{data_ege[id_element][1][1]}[/font]")
             else:
                 answer = data_word[id_element][0]
 
