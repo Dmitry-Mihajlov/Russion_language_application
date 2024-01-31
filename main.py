@@ -44,10 +44,13 @@ class MainApp(MDApp):
         self.data_count_app = None
         self.data_answer_flag = None
         self.data_button = None
+        self.id_colection = None
+
 
     def on_start(self):
         self.data_button = dict()
         self.data_answer_flag = dict()
+        self.id_colection = []
         self.data_count_app = 0
 
         self.root.ids.box.add_widget(Builder.load_string('''
@@ -94,7 +97,12 @@ MDRectangleFlatIconButton:
             self.root.ids.box.add_widget(self.data_2)
 
         for i in range(5):
-            id_ege = random.randint(0, len(data_ege) - 1)
+            while True:
+                id_ege = random.randint(0, len(data_ege) - 1)
+                if id_ege not in self.id_colection:
+                    self.id_colection.append(id_ege)
+                    break
+
             self.data_answer_flag[f'ege_{id_ege}'] = 1
 
             text_1 = data_ege[f'ege_{id_ege}'][0][0]
@@ -146,9 +154,9 @@ MDRoundFlatButton:
             dialog.dismiss()
             self.on_start()
 
-        if self.data_count_app < 3:
+        if self.data_count_app <= 5:
             text = 'Лучше потренируйтесь еще и обязательно повторите теорию'
-        elif self.data_count_app < 12:
+        elif self.data_count_app <= 10:
             text = 'Хороший результат, так держать!'
         else:
             text = 'Прекрасный результат!'
