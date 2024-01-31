@@ -4,7 +4,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.screen import Screen
 from kivy.lang import Builder
 from kivymd.app import MDApp
-from Russion_language_application.data import data_ege, data_word
+from data import data_ege, data_word
 import random
 
 Builder.load_file('main_screen.kv')
