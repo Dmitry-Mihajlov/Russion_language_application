@@ -46,7 +46,6 @@ class MainApp(MDApp):
         self.data_button = None
         self.id_colection = None
 
-
     def on_start(self):
         self.data_button = dict()
         self.data_answer_flag = dict()
