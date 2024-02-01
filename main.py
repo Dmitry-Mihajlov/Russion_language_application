@@ -4,10 +4,14 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.screen import Screen
 from kivy.lang import Builder
 from kivymd.app import MDApp
-from data import data_ege, data_word
+from data.data_element import data_ege, data_word
 import random
+from kivy.config import Config
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+old_count = 0
 
-Builder.load_file('main_screen.kv')
+
+Builder.load_file('data/main_screen.kv')
 
 
 class CopyLabel_1(MDLabel):
@@ -152,6 +156,16 @@ MDRoundFlatButton:
             self.root.ids.box.clear_widgets()
             dialog.dismiss()
             self.on_start()
+        global old_count
+        r = self.data_count_app - old_count
+        old_count = self.data_count_app
+
+        if r > 0:
+            dop = f'Баллы: {old_count}\nНа {r} больше решенный заданий чем в прошлый раз'
+        elif r == 0:
+            dop = f'Баллы: {old_count}\nВы держитесь на том же результате'
+        else:
+            dop = f'Баллы: {old_count}\nНа {abs(r)} меньше решенных заданий чем в прошлый раз'
 
         if self.data_count_app <= 5:
             text = 'Лучше потренируйтесь еще и обязательно повторите теорию'
@@ -161,6 +175,7 @@ MDRoundFlatButton:
             text = 'Прекрасный результат!'
         dialog = MDDialog(
             title=text,
+            text=dop,
             buttons=[
                 MDFlatButton(
                     text='Пройти следующий тест',
@@ -201,7 +216,7 @@ MDRoundFlatButton:
         elif self.data_answer_flag[id_element]:
             print(input_answer, 'NO')
             if id_element[:3] == 'ege':
-                answer = (f"[font=21154.otf]{data_ege[id_element][2][0]}\n"
+                answer = (f"[font=data/21154.otf]{data_ege[id_element][2][0]}\n"
                           f"{data_ege[id_element][1][0]}\n{data_ege[id_element][1][1]}[/font]")
             else:
                 answer = data_word[id_element][0]
@@ -253,3 +268,5 @@ MDRoundFlatButton:
 
 if __name__ == '__main__':
     MainApp().run()
+
+
