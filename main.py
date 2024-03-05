@@ -39,16 +39,11 @@ class MainScreen(Screen):
 class MainApp(MDApp):
     def __init__(self):
         super().__init__()
-        self.data_2 = None
-        self.data_1 = None
-        self.copy_label_2 = None
-        self.copy_label_1 = None
-        self.locale_2 = None
-        self.locale_1 = None
-        self.data_count_app = None
-        self.data_answer_flag = None
-        self.data_button = None
-        self.id_colection = None
+        self.data_2 = self.data_1 = None
+        self.copy_label_1 = self.copy_label_2 = None
+        self.locale_1 = self.locale_2 = None
+        self.data_count_app = self.data_answer_flag = None
+        self.data_button = self.id_colection = None
 
     def on_start(self):
         self.data_button = dict()
